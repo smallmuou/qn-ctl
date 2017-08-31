@@ -1,10 +1,16 @@
 # qn-cli
 
-> 七牛命令行集合，类似于linux文件操作命令来操作七牛云
-> 
+> 七牛云文件命令行集合，类似于linux文件操作命令来操作七牛云
 
 ## 安装
+1. 在安装此命令之前，请先安装[qrsctl](https://developer.qiniu.com/kodo/tools/1300/qrsctl)
+```bash
+mv qrsctl-xxx qrsctl
+chmod +x qrsctl
+sudo mv qrsctl /usr/local/bin
+```
 
+2. 安装该命令集
 ```
 git clone https://github.com/smallmuou/qn-ctl
 cd qn-cli
