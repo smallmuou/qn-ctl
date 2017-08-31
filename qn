@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+#EXECUTE-FILE
+
+EXE=`basename $0`
+PKG="$EXE-cli"
+
+[ -L $0 ] && pushd `readlink $0 | xargs dirname` > /dev/null \
+    || pushd `dirname $0` > /dev/null
+export MPATH=`pwd -P`
+popd > /dev/null
+
+
+confirm () {
+    read -r -p "${1:-Are you sure? [y/N]} " response
+    case $response in
+        [yY][eE][sS]|[yY])
+            true
+            ;;
+        *)
+            false
+            ;;
+    esac
+}
+
+
+uninstall(){
+    confirm "Do you want to uninstall $PKG? [y/n]: " \
+        && sudo rm -rf ${MPATH} 2>/dev/null \
+        && sudo rm -f "/usr/local/bin/$EXE" 2>/dev/null \
+        && echo "Done !"
+}
+
+
+COMMANDS_PATH=${MPATH}/commands
+usage(){
+
+    cat <<__EOF__
+usage:  $EXE [OPTIONS] COMMAND [--help]
+    
+    OPTIONS:
+        -h show this help message and exit 
+        -u uninstall $PKG 
+
+    COMMANDS:
+__EOF__
+
+    traverse_commands ${COMMANDS_PATH}
+
+    exit 1
+}
+
+traverse_commands() {
+    if [ -d $1 ];then
+        for i in $1/*; do
+            traverse_commands $i
+        done
+    else
+        [ ! -L "$i" -a -f "$i"  ] && echo "       `echo -n ${i/$COMMANDS_PATH/}|sed 's/\// /g'`"
+    fi
+}
+
+# traverse basepath command
+traverse() {
+    BASEPATH=$1; shift;
+    COMMAND=${BASEPATH}/$1; shift;
+
+    [ ! -e ${COMMAND} ] && usage
+    if [ -d ${COMMAND} ];then
+        [ $# -eq 0 ] && usage
+        traverse ${COMMAND} "$@"
+    else 
+        ${COMMAND} "$@"
+    fi
+}
+
+case $1 in
+    -h)
+        usage && exit 0
+        ;;
+    -u)
+        uninstall && exit 0
+        ;;
+esac
+
+traverse $COMMANDS_PATH "$@"
