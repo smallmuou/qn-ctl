@@ -3,6 +3,7 @@
 
 EXE=`basename $0`
 PKG="$EXE-cli"
+VERSION=1.0.0
 
 [ -L $0 ] && pushd `readlink $0 | xargs dirname` > /dev/null \
     || pushd `dirname $0` > /dev/null
@@ -35,7 +36,8 @@ COMMANDS_PATH=${MPATH}/commands
 usage(){
 
     cat <<__EOF__
-usage:  $EXE [OPTIONS] COMMAND [--help]
+$EXE version $VERSION
+usage:  $EXE [OPTIONS] COMMAND
     
     OPTIONS:
         -h show this help message and exit 
