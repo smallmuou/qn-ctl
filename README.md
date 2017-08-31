@@ -1,6 +1,12 @@
 # qn-cli
 
-> 七牛云文件命令行集合，类似于linux文件操作命令来操作七牛云
+> 七牛云文件操作命令行集合，类似于linux文件操作
+> ![示例](/path/to/img.jpg "示例")
+>
+
+<link rel="stylesheet" type="text/css" href="http://oltdjo9l7.bkt.clouddn.com/asciinema-player.css" />
+<script src="http://oltdjo9l7.bkt.clouddn.com/asciinema-player.js"></script>
+<asciinema-player src="res/qnctl.json" autoplay preload></asciinema-player>
 
 ## 安装
 1. 在安装此命令之前，请先安装[qrsctl](https://developer.qiniu.com/kodo/tools/1300/qrsctl)
