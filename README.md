@@ -28,7 +28,7 @@ qn config your-ak your-sk
 ## 已支持的命令集
 
 |命令|功能描述|例子
-|:--|:--
+|:--|:--|:--
 |config|配置AccessKey和SecretKey| qn config xyour-ak your-sk
 |ls|列出bucket或文件|qn ls
 |mkdir|创建bucket|qn mkdir 1 2 3
