@@ -8,7 +8,7 @@
 ```
 git clone https://github.com/smallmuou/qn-ctl
 cd qn-cli
-/bin/bash install.sh
+sudo /bin/bash install.sh
 ```
 
 ## 使用
