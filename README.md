@@ -43,6 +43,7 @@ qn config your-ak your-sk
 |put|上传本地文件至七牛
 |mv|移动或重命名文件（不支持bucket）|qn mv 1/* 2
 |cp|拷贝文件|qn cp 1/* 2
+|stat|查看bucket/文件详情|qn stat 1
 
 ## 名称说明
 
