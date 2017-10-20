@@ -99,6 +99,15 @@ shift $(($OPTIND - 1))
 
 [ $# -lt 1 ]&&usage
 
+check_config() {
+    authfile=$HOME/.qrsctl/.digestauth
+    [ ! -f $authfile ] && { error "Please config first."; exit -1; }
+    [ -z `cat $authfile` ] && { error "Please config first."; exit -1; }
+    echo -n
+}
+
+check_config
+
 isfile() {
     result=`echo $1|sed -n '/\/$/p'`
     if [ -z "$result" ];then
