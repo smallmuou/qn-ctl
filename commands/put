@@ -97,7 +97,7 @@ done
 
 shift $(($OPTIND - 1))
 
-[ $# -ne 2 ]&&usage
+[ $# -lt 2 ] && usage
 
 check_config() {
     authfile=$HOME/.qrsctl/.digestauth
@@ -115,5 +115,10 @@ put() {
     qrsctl put -c $2 `basename $1` $1 
 }
 
-put $1 $2
+while [ $# -gt 1 ];
+do
+    info "put $1 ..."
+    put $1 ${!#}
+    shift
+done
 
