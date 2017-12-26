@@ -117,11 +117,17 @@ list() {
     if [ $# -eq 0 ];then
         qrsctl buckets|sed 's/^\[//g'|sed 's/\]$//g'|sed $'s/ /\\\n/g'
     elif [ $# -eq 1 ];then
-        qrsctl listprefix $1 ''|sed '1d'
+        url=`qn stat $1|awk '{print $6}'`
+        export url
+        qrsctl listprefix $1 ''|sed '1d'|awk '{printf "-    %-32s     %s/%s\n", $0 ,ENVIRON["url"],$0}'
     elif [ $2 == "*" ];then
-        qrsctl listprefix $1 ''|sed '1d'
+        url=`qn stat $1|awk '{print $6}'`
+        export url
+        qrsctl listprefix $1 ''|sed '1d'|awk '{printf "-    %-32s     %s/%s\n", $0 ,ENVIRON["url"],$0}'
     else
-        qrsctl listprefix $1 $2|sed '1d'
+        url=`qn stat $1|awk '{print $6}'`
+        export url
+        qrsctl listprefix $1 $2|sed '1d'|awk '{printf "-    %-32s     %s/%s\n", $0 ,ENVIRON["url"],$0}'
     fi
 }
 
